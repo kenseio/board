@@ -1,24 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <PostComment></PostComment>
+    <ViewComments></ViewComments>
   </div>
 </template>
 
+//TODO: ポストしたあとに表示し直す
+//TODO: 削除機能を追加
+//TODO: ページネーションを追加
+//TODO: bootstrapできれいにする。
+//TODO: 入力チェックする
+
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PostComment from "./components/PostComment.vue";
+import ViewComments from "./components/ViewComments.vue";
 
 export default {
-  name: 'app',
   components: {
-    HelloWorld
+    PostComment,
+    ViewComments
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
