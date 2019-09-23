@@ -24,7 +24,12 @@
 
 <script>
 import _ from "lodash";
+import moment from "moment";
 import db from "../firebase";
+
+function datetimeFormatter(time) {
+  return moment(time).format("YYYY/MM/DD H:mm:ss");
+}
 
 export default {
   data() {
@@ -57,7 +62,8 @@ export default {
           tmp.key = document._document.proto.name;
           tmp.name = document._document.proto.fields.name.stringValue;
           tmp.comment = document._document.proto.fields.comment.stringValue;
-          tmp.time = document._document.proto.updateTime; //TODO:日時表示をいい感じにする
+          let time = document._document.proto.updateTime;
+          tmp.time = datetimeFormatter(time);
           tmp.docmentId = document.id;
           this.posts.push(tmp);
         }
