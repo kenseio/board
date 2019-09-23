@@ -17,7 +17,6 @@
 
 <script>
 import db from "../firebase";
-// import axios from "../axios-common";
 export default {
   data() {
     return {
@@ -37,7 +36,6 @@ export default {
       this.newPost.name = this.name;
       this.newPost.comment = this.comment;
       this.newPost.time = Date.now();
-      console.log(this.newPost);
       this.$store.commit("addNewPost", this.newPost);
 
       //表示を空にする

@@ -52,7 +52,6 @@ export default {
     db.collection("comments")
       .get()
       .then(querySnapshot => {
-        console.log(querySnapshot);
         for (let document of querySnapshot.docs) {
           let tmp = {};
           tmp.key = document._document.proto.name;
@@ -63,21 +62,16 @@ export default {
           this.posts.push(tmp);
         }
         this.posts = _.orderBy(this.posts, "time", "desc");
-        console.log(this.posts);
       });
   },
   methods: {
     deleteComment(index) {
       //indexからidを特定
       let targetId = this.posts[index].docmentId;
-      console.log(targetId);
       //idをしていして更新リクエスト
       db.collection("comments")
         .doc(targetId)
-        .delete()
-        .then(response => {
-          console.log(response);
-        });
+        .delete();
       //posts配列から削除
       this.posts.splice(index, 1);
     }
