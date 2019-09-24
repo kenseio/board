@@ -4,7 +4,7 @@
 
     <v-row v-if="show">
       <v-col cols="12" sm="4" v-for="newPost in newPosts" :key="newPost.time">
-        <v-card max-width="300" class="pa-2 ma-2">
+        <v-card max-width="344" class="pa-2 ma-2">
           <v-card-title class="subtitle-1">{{newPost.comment}}</v-card-title>
           <v-card-text class="body-2">{{newPost.name}}</v-card-text>
           <v-card-text class="caption">{{newPost.time}}</v-card-text>
@@ -18,7 +18,7 @@
     <v-row>
       <!-- <transition-group appear name="fade"> -->
       <!-- <v-slide-x-transition group> -->
-      <v-col v-for="(post, index) in posts" :key="post.key" cols="12" sm="=4">
+      <v-col cols="12" sm="4" v-for="(post, index) in posts" :key="post.key">
         <v-card max-width="344" class="pa-2 ma-2">
           <v-card-title class="subtitle-1">{{post.comment}}</v-card-title>
           <v-card-text class="body-2">{{post.name}}</v-card-text>
