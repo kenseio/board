@@ -1,25 +1,39 @@
 <template>
-  <div>
-    <br />
+  <v-container>
     <hr />
-    <div v-if="show">
-      <div v-for="newPost in newPosts" :key="newPost.time">
-        <div>名前 ：{{newPost.name}}</div>
-        <div>コメント：{{newPost.comment}}</div>
-        <div>投稿日時：{{newPost.time}}</div>
-        <div>new!</div>
-        <br />
-      </div>
-    </div>
-    <div v-for="(post, index) in posts" :key="post.id">
-      <div>名前 ：{{post.name}}</div>
-      <div>コメント：{{post.comment}}</div>
-      <div>投稿日時：{{post.time}}</div>
-      <button @click="deleteComment(index)">削除</button>
-      <br />
-      <br />
-    </div>
-  </div>
+
+    <v-row v-if="show">
+      <v-col cols="12" sm="4" v-for="newPost in newPosts" :key="newPost.time">
+        <v-card max-width="300" class="pa-2 ma-2">
+          <v-card-title class="subtitle-1">{{newPost.comment}}</v-card-title>
+          <v-card-text class="body-2">{{newPost.name}}</v-card-text>
+          <v-card-text class="caption">{{newPost.time}}</v-card-text>
+          <span>
+            <v-icon>mdi-new-box</v-icon>
+          </span>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <!-- <transition-group appear name="fade"> -->
+      <!-- <v-slide-x-transition group> -->
+      <v-col v-for="(post, index) in posts" :key="post.key" cols="12" sm="=4">
+        <v-card max-width="344" class="pa-2 ma-2">
+          <v-card-title class="subtitle-1">{{post.comment}}</v-card-title>
+          <v-card-text class="body-2">{{post.name}}</v-card-text>
+          <v-card-text class="caption">{{post.time}}</v-card-text>
+          <v-card-actions>
+            <v-btn icon @click="deleteComment(index)">
+              <v-icon>mdi-delete-outline</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+      <!-- </v-slide-x-transition> -->
+      <!-- </transition-group> -->
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -28,7 +42,7 @@ import moment from "moment";
 import db from "../firebase";
 
 function datetimeFormatter(time) {
-  return moment(time).format("YYYY/MM/DD H:mm:ss");
+  return moment(time).format("YYYY/MM/DD HH:mm:ss");
 }
 
 export default {
@@ -84,3 +98,14 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

@@ -1,25 +1,27 @@
 <template>
-  <v-app>
-    <v-content>
-      <h2>掲示板</h2>
-      <h3>掲示板に投稿する</h3>
-      <v-row>
-        <v-col cols="12" sm="6">
-          <v-text-field label="ニックネーム" single-line v-model="name"></v-text-field>
-        </v-col>
-      </v-row>
-      <!-- <label for="name">ニックネーム</label>
-    <v-text-field type="text" id="name" v-model="name"></v-text-field>
+  <v-container>
+    <h2 style="margin-top: 20px; text-align: center;">掲示板</h2>
     <br />
-      <br />-->
-      <label for="commennt">コメント</label>
-      <textarea id="comment" v-model="comment"></textarea>
-      <br />
-      <br />
-      <button @click="createComment">コメントを投稿する</button>
-      <br />
-    </v-content>
-  </v-app>
+    <v-row justify="center" class="mx-auto">
+      <v-col cols="12" md="4" sm="6" class="mx-auto">
+        <v-text-field
+          clearable
+          label="ニックネーム"
+          v-model="name"
+          single-line
+          solo
+          :rules="[rules.required]"
+        ></v-text-field>
+        <v-textarea clearable label="コメント" v-model="comment" solo :rules="[rules.required]"></v-textarea>
+
+        <v-btn :disabled="isDisabled" @click="createComment">コメントを投稿する</v-btn>
+        <v-btn class="right" icon @click="reload()">
+          <v-icon>mdi-reload</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <br />
+  </v-container>
 </template>
 
 <script>
@@ -27,7 +29,7 @@ import db from "../firebase";
 import moment from "moment";
 
 function datetimeFormatter(time) {
-  return moment(time).format("YYYY/MM/DD H:mm:ss");
+  return moment(time).format("YYYY/MM/DD HH:mm:ss");
 }
 
 export default {
@@ -35,10 +37,25 @@ export default {
     return {
       name: "",
       comment: "",
-      newPost: {}
+      newPost: {},
+      rules: {
+        required: value => !!value || "Required."
+      }
     };
   },
+  computed: {
+    isDisabled() {
+      if (this.name && this.comment) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  },
   methods: {
+    reload() {
+      location.reload();
+    },
     createComment() {
       db.collection("comments").add({
         name: this.name,
@@ -59,3 +76,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.right {
+  float: right;
+  margin-right: 5px;
+}
+</style>

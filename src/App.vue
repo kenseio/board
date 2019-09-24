@@ -1,21 +1,22 @@
 <template>
-  <div id="app">
-    <PostComment></PostComment>
-    <ViewComments></ViewComments>
-  </div>
+  <v-app>
+    <div id="app">
+      <PostComment></PostComment>
+      <ViewComments></ViewComments>
+    </div>
+  </v-app>
 </template>
 
-//TODO: ポストしたあとに表示し直す
-//TODO: 削除機能を追加
 //TODO: ページネーションを追加
-//TODO: bootstrapできれいにする。
-//TODO: 入力チェックする
+//TODO: CSSアニメーションで動きをつける 追加したときにぬるっと下に動く、削除したときにぬるっと上に動く
+//TODO: Newも削除できるようにする
 
 <script>
 import PostComment from "./components/PostComment.vue";
 import ViewComments from "./components/ViewComments.vue";
 
 export default {
+  name: "App",
   components: {
     PostComment,
     ViewComments
@@ -23,13 +24,3 @@ export default {
 };
 </script>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
