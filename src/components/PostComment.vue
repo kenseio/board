@@ -7,7 +7,6 @@
         <v-textarea clearable label="コメント" v-model="comment" solo></v-textarea>
 
         <v-btn :disabled="isDisabled" @click="createComment">コメントを投稿する</v-btn>
-        <span sty>再読み込み</span>
         <v-btn class="right" icon @click="reload()">
           <v-icon>mdi-reload</v-icon>
         </v-btn>
