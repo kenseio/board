@@ -9,7 +9,6 @@
 
 //TODO: ページネーションを追加
 //TODO: CSSアニメーションで動きをつける 追加したときにぬるっと下に動く、削除したときにぬるっと上に動く
-//TODO: Newも削除できるようにする
 
 <script>
 import PostComment from "./components/PostComment.vue";

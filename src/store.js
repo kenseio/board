@@ -14,6 +14,11 @@ export default new Vuex.Store({
   mutations: {
     addNewPost(state, newPost) {
       state.newPosts.push(newPost);
+    },
+    deleteNewPost(state, documentId) {
+      // 引数のdocumentIdから、newPosts内の該当の要素Indexを取得
+      const targetIndex = state.newPosts.find(v => v.documentId === documentId);
+      state.newPosts.splice(targetIndex, 1);
     }
   }
 });

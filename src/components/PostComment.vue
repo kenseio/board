@@ -1,20 +1,13 @@
 <template>
   <v-container>
     <h2 style="margin-top: 20px; text-align: center;">掲示板</h2>
-    <br />
     <v-row justify="center" class="mx-auto">
       <v-col cols="12" md="4" sm="6" class="mx-auto">
-        <v-text-field
-          clearable
-          label="ニックネーム"
-          v-model="name"
-          single-line
-          solo
-          :rules="[rules.required]"
-        ></v-text-field>
-        <v-textarea clearable label="コメント" v-model="comment" solo :rules="[rules.required]"></v-textarea>
+        <v-text-field clearable label="ニックネーム" v-model="name" single-line solo></v-text-field>
+        <v-textarea clearable label="コメント" v-model="comment" solo></v-textarea>
 
         <v-btn :disabled="isDisabled" @click="createComment">コメントを投稿する</v-btn>
+        <span sty>再読み込み</span>
         <v-btn class="right" icon @click="reload()">
           <v-icon>mdi-reload</v-icon>
         </v-btn>
@@ -37,10 +30,10 @@ export default {
     return {
       name: "",
       comment: "",
-      newPost: {},
-      rules: {
-        required: value => !!value || "Required."
-      }
+      newPost: {}
+      // rules: {
+      //   required: value => !!value || "Required."
+      // }
     };
   },
   computed: {
@@ -57,21 +50,23 @@ export default {
       location.reload();
     },
     createComment() {
-      db.collection("comments").add({
-        name: this.name,
-        comment: this.comment
-      });
-
-      //VuexのStateに追加する
-      this.newPost.name = this.name;
-      this.newPost.comment = this.comment;
-      this.newPost.time = datetimeFormatter(Date.now());
-      this.$store.commit("addNewPost", this.newPost);
-
-      //表示を空にする
-      this.name = "";
-      this.comment = "";
-      this.newPost = {};
+      db.collection("comments")
+        .add({
+          name: this.name,
+          comment: this.comment
+        })
+        .then(DocumentReference => {
+          //VuexのStateに追加する
+          this.newPost.documentId = DocumentReference.id;
+          this.newPost.name = this.name;
+          this.newPost.comment = this.comment;
+          this.newPost.time = datetimeFormatter(Date.now());
+          this.$store.commit("addNewPost", this.newPost);
+          //表示を空にする
+          this.name = "";
+          this.comment = "";
+          this.newPost = {};
+        });
     }
   }
 };

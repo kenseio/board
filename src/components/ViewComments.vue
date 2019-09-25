@@ -3,13 +3,22 @@
     <hr />
 
     <v-row v-if="show">
-      <v-col cols="12" sm="4" v-for="newPost in newPosts" :key="newPost.time">
+      <v-col cols="12" sm="4" v-for="(newPost, index) in newPosts" :key="newPost.time">
         <v-card max-width="344" class="pa-2 ma-2">
           <v-card-title class="subtitle-1">{{newPost.comment}}</v-card-title>
           <v-card-text class="body-2">{{newPost.name}}</v-card-text>
-          <v-card-text class="caption">{{newPost.time}}</v-card-text>
+          <v-card-text class="caption">
+            {{newPost.time}}
+            <span>
+              <v-icon>mdi-new-box</v-icon>
+            </span>
+          </v-card-text>
           <span>
-            <v-icon>mdi-new-box</v-icon>
+            <v-card-actions>
+              <v-btn icon @click="deleteNewComment(index)">
+                <v-icon>mdi-delete-outline</v-icon>
+              </v-btn>
+            </v-card-actions>
           </span>
         </v-card>
       </v-col>
@@ -24,7 +33,7 @@
           <v-card-text class="body-2">{{post.name}}</v-card-text>
           <v-card-text class="caption">{{post.time}}</v-card-text>
           <v-card-actions>
-            <v-btn icon @click="deleteComment(index)">
+            <v-btn icon @click="deleteOldComment(index)">
               <v-icon>mdi-delete-outline</v-icon>
             </v-btn>
           </v-card-actions>
@@ -43,6 +52,13 @@ import db from "../firebase";
 
 function datetimeFormatter(time) {
   return moment(time).format("YYYY/MM/DD HH:mm:ss");
+}
+
+function deleteComment(targetId) {
+  // コメント削除する共通部品
+  db.collection("comments")
+    .doc(targetId)
+    .delete();
 }
 
 export default {
@@ -85,13 +101,17 @@ export default {
       });
   },
   methods: {
-    deleteComment(index) {
+    deleteNewComment(index) {
+      let targetId = this.$store.getters.newPosts[index].documentId;
+      deleteComment(targetId);
+      // vuexのデータを消す
+      this.$store.commit("deleteNewPost", targetId);
+    },
+    deleteOldComment(index) {
       //indexからidを特定
       let targetId = this.posts[index].docmentId;
       //idをしていして更新リクエスト
-      db.collection("comments")
-        .doc(targetId)
-        .delete();
+      deleteComment(targetId);
       //posts配列から削除
       this.posts.splice(index, 1);
     }
