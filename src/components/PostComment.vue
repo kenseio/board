@@ -7,8 +7,9 @@
         <v-textarea clearable label="コメント" v-model="comment" solo></v-textarea>
 
         <v-btn :disabled="isDisabled" @click="createComment">コメントを投稿する</v-btn>
-        <v-btn class="right" icon @click="reload()">
-          <v-icon>mdi-reload</v-icon>
+        <v-btn text class="right grey--text" @click="reload()">
+          <span>RELOAD</span>
+          <v-icon right>mdi-reload</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -61,6 +62,7 @@ export default {
           this.newPost.comment = this.comment;
           this.newPost.time = datetimeFormatter(Date.now());
           this.$store.commit("addNewPost", this.newPost);
+          this.$store.commit("sortNewPosts");
           //表示を空にする
           this.name = "";
           this.comment = "";

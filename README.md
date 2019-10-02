@@ -1,29 +1,5 @@
-# vuejs-http
+# かんんたんな掲示板 web アプリ
 
-## Project setup
-```
-npm install
-```
+投稿したり、投稿したコメントを閲覧したり、コメントの削除ができます。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+https://board-kenseio.netlify.com/
