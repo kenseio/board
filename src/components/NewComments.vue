@@ -11,22 +11,22 @@
               <v-icon>mdi-new-box</v-icon>
             </span>
           </v-card-text>
-
           <v-btn text small class="grey--text" @click="onClickBtn(index)">
             <span>DELETE</span>
             <v-icon>mdi-delete-outline</v-icon>
           </v-btn>
-          <v-dialog v-model="dialog" persistent max-width="220">
-            <v-card>
-              <v-card-text class="subtitle-1 pa-5">コメントを削除します。よろしいですか？</v-card-text>
-              <v-card-actions>
-                <v-btn text class="grey--text" @click="dialog=false">NO</v-btn>
-                <v-btn text class="grey--text" @click="deleteNewComment(currentIndex)">YES</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
         </v-card>
       </v-col>
+
+      <v-dialog v-model="dialog" persistent max-width="220">
+        <v-card>
+          <v-card-text class="subtitle-1 pa-5">コメントを削除します。よろしいですか？</v-card-text>
+          <v-card-actions>
+            <v-btn text class="grey--text" @click="dialog=false">NO</v-btn>
+            <v-btn text class="grey--text" @click="deleteNewComment(currentIndex)">YES</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-row>
   </v-container>
 </template>
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       dialog: false,
-      currentIndex: null
+      currentIndex: 0
     };
   },
 
@@ -77,7 +77,7 @@ export default {
       // vuexのデータを消す
       this.$store.commit("deleteNewPost", targetId);
       this.dialog = false;
-      this.currentIndex = null;
+      this.currentIndex = 0;
     }
   }
 };

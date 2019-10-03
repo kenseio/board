@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <div id="app">
-      <PostComment></PostComment>
-      <ViewComments></ViewComments>
+      <PostComment />
+      <ViewComments />
     </div>
   </v-app>
 </template>

@@ -13,17 +13,17 @@
             <span>DELETE</span>
             <v-icon>mdi-delete-outline</v-icon>
           </v-btn>
-          <v-dialog v-model="dialog" persistent max-width="220">
-            <v-card>
-              <v-card-text class="subtitle-1 pa-5">コメントを削除します。よろしいですか？</v-card-text>
-              <v-card-actions>
-                <v-btn text class="grey--text" @click="dialog=false">NO</v-btn>
-                <v-btn text class="grey--text" @click="deleteOldComment(currentIndex)">YES</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
         </v-card>
       </v-col>
+      <v-dialog v-model="dialog" persistent max-width="220">
+        <v-card>
+          <v-card-text class="subtitle-1 pa-5">コメントを削除します。よろしいですか？</v-card-text>
+          <v-card-actions>
+            <v-btn text class="grey--text" @click="dialog=false">NO</v-btn>
+            <v-btn text class="grey--text" @click="deleteOldComment(currentIndex)">YES</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <!-- </v-slide-x-transition> -->
       <!-- </transition-group> -->
     </v-row>
@@ -59,14 +59,6 @@ export default {
   computed: {
     newPosts() {
       return _.orderBy(this.$store.getters.newPosts, "time", "desc");
-    },
-    show() {
-      //   if (Object.keys(this.$store.getters.newPost).length > 0) {
-      if (this.$store.getters.newPosts.length > 0) {
-        return true;
-      } else {
-        return false;
-      }
     }
   },
 

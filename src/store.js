@@ -20,8 +20,10 @@ export default new Vuex.Store({
       state.newPosts = _.orderBy(state.newPosts, "time", "desc");
     },
     deleteNewPost(state, documentId) {
-      // 引数のdocumentIdから、newPosts内の該当の要素Indexを取得
-      const targetIndex = state.newPosts.find(v => v.documentId === documentId);
+      // 引数のdocumentIdから、newPosts配列内の該当の要素Indexを取得して、配列から削除
+      let targetIndex = state.newPosts.findIndex(
+        v => v.documentId === documentId
+      );
       state.newPosts.splice(targetIndex, 1);
     }
   }
