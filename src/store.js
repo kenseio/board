@@ -26,5 +26,16 @@ export default new Vuex.Store({
       );
       state.newPosts.splice(targetIndex, 1);
     }
+  },
+  actions: {
+    addNewPost(context, newPost) {
+      context.commit("addNewPost", newPost);
+    },
+    sortNewPosts(context) {
+      context.commit("sortNewPosts");
+    },
+    deleteNewPost(context, documentId) {
+      context.commit("deleteNewPost", documentId);
+    }
   }
 });

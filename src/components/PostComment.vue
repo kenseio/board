@@ -61,8 +61,8 @@ export default {
           this.newPost.name = this.name;
           this.newPost.comment = this.comment;
           this.newPost.time = datetimeFormatter(Date.now());
-          this.$store.commit("addNewPost", this.newPost);
-          this.$store.commit("sortNewPosts");
+          this.$store.dispatch("addNewPost", this.newPost);
+          this.$store.dispatch("sortNewPosts");
           //表示を空にする
           this.name = "";
           this.comment = "";

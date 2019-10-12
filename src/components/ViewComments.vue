@@ -1,9 +1,9 @@
 <template>
-  <v-container>
+  <v-app>
     <hr />
     <NewComments />
     <OldComments />
-  </v-container>
+  </v-app>
 </template>
 
 <script>

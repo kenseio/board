@@ -1,10 +1,18 @@
 <template>
   <v-container>
+    <!-- <transition-group appear name="fade"> -->
+    <!-- <v-slide-x-transition group> -->
     <v-row>
-      <!-- <transition-group appear name="fade"> -->
-      <!-- <v-slide-x-transition group> -->
-      <v-col cols="12" sm="4" v-for="(post, index) in posts" :key="post.documentId">
-        <v-card max-width="344" class="pa-2 ma-2">
+      <v-col
+        cols="12"
+        sm="12"
+        md="6"
+        lg="4"
+        xl="3"
+        v-for="(post, index) in posts"
+        :key="post.documentId"
+      >
+        <v-card class="ma-2 pa-2">
           <v-card-title class="subtitle-1">{{post.comment}}</v-card-title>
           <v-card-text class="body-2">{{post.name}}</v-card-text>
           <v-card-text class="caption">{{post.time}}</v-card-text>
@@ -15,18 +23,19 @@
           </v-btn>
         </v-card>
       </v-col>
-      <v-dialog v-model="dialog" persistent max-width="220">
-        <v-card>
-          <v-card-text class="subtitle-1 pa-5">コメントを削除します。よろしいですか？</v-card-text>
-          <v-card-actions>
-            <v-btn text class="grey--text" @click="dialog=false">NO</v-btn>
-            <v-btn text class="grey--text" @click="deleteOldComment(currentIndex)">YES</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <!-- </v-slide-x-transition> -->
-      <!-- </transition-group> -->
     </v-row>
+
+    <v-dialog v-model="dialog" persistent max-width="220">
+      <v-card>
+        <v-card-text class="subtitle-1 pa-5">コメントを削除します。よろしいですか？</v-card-text>
+        <v-card-actions>
+          <v-btn text class="grey--text" @click="dialog=false">NO</v-btn>
+          <v-btn text class="grey--text" @click="deleteOldComment(currentIndex)">YES</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- </v-slide-x-transition> -->
+    <!-- </transition-group> -->
   </v-container>
 </template>
 
