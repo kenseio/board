@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <hr />
-    <NewComments />
-    <OldComments />
+    <NewComments :color="color" />
+    <OldComments :color="color" />
   </v-app>
 </template>
 
@@ -11,6 +11,7 @@ import NewComments from "./NewComments.vue";
 import OldComments from "./OldComments.vue";
 
 export default {
+  props: ["color"],
   components: {
     NewComments,
     OldComments

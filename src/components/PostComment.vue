@@ -3,10 +3,25 @@
     <h2 style="margin-top: 20px; text-align: center;">掲示板</h2>
     <v-row justify="center" class="mx-auto">
       <v-col cols="12" md="4" sm="6" class="mx-auto">
-        <v-text-field clearable label="ニックネーム" v-model="name" single-line solo></v-text-field>
-        <v-textarea clearable label="コメント" v-model="comment" solo></v-textarea>
+        <v-text-field
+          clearable
+          label="ニックネーム"
+          single-line
+          solo
+          :color="color"
+          prepend-inner-icon="mdi-account"
+          v-model="name"
+        ></v-text-field>
+        <v-textarea
+          clearable
+          label="コメント"
+          solo
+          :color="color"
+          prepend-inner-icon="mdi-comment"
+          v-model="comment"
+        ></v-textarea>
 
-        <v-btn :disabled="isDisabled" @click="createComment">コメントを投稿する</v-btn>
+        <v-btn :loading="loading" :disabled="isDisabled" @click="createComment">コメントを投稿する</v-btn>
         <v-btn text class="right grey--text" @click="reload()">
           <span>RELOAD</span>
           <v-icon right>mdi-reload</v-icon>
@@ -14,6 +29,11 @@
       </v-col>
     </v-row>
     <br />
+
+    <v-snackbar v-model="snackbar" bottom right timeout="6000" :color="color">
+      <span>コメントを投稿しました。</span>
+      <v-btn dark text @click="snackbar = false">CLOSE</v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -26,11 +46,14 @@ function datetimeFormatter(time) {
 }
 
 export default {
+  props: ["color"],
   data() {
     return {
       name: "",
       comment: "",
-      newPost: {}
+      newPost: {},
+      loading: false,
+      snackbar: false
       // rules: {
       //   required: value => !!value || "Required."
       // }
@@ -50,6 +73,9 @@ export default {
       location.reload();
     },
     createComment() {
+      //ボタン表示を読込中に
+      this.loading = true;
+      // firestoreに書き込み
       db.collection("comments")
         .add({
           name: this.name,
@@ -67,6 +93,9 @@ export default {
           this.name = "";
           this.comment = "";
           this.newPost = {};
+          this.loading = false;
+          //snackbarを表示する
+          this.snackbar = true;
         });
     }
   }

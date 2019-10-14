@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <div id="app">
-      <PostComment />
-      <ViewComments />
+      <PostComment :color="color" />
+      <ViewComments :color="color" />
     </div>
   </v-app>
 </template>
@@ -19,6 +19,11 @@ export default {
   components: {
     PostComment,
     ViewComments
+  },
+  data() {
+    return {
+      color: "blue-grey darken-2"
+    };
   }
 };
 </script>

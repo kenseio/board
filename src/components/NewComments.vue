@@ -36,6 +36,11 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-snackbar v-model="snackbar" bottom right timeout="6000" :color="color">
+      コメントを削除しました。
+      <v-btn dark text @click="snackbar = false">CLOSE</v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -51,9 +56,11 @@ function deleteComment(targetId) {
 }
 
 export default {
+  props: ["color"],
   data() {
     return {
       dialog: false,
+      snakcbar: false,
       currentIndex: 0
     };
   },
@@ -86,6 +93,8 @@ export default {
       this.$store.dispatch("deleteNewPost", targetId);
       this.dialog = false;
       this.currentIndex = 0;
+      // snackbarを表示
+      this.snackbar = true;
     }
   }
 };

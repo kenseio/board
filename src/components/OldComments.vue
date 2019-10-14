@@ -36,6 +36,11 @@
     </v-dialog>
     <!-- </v-slide-x-transition> -->
     <!-- </transition-group> -->
+
+    <v-snackbar v-model="snackbar" bottom right timeout="6000" :color="color">
+      <span>コメントを削除しました。</span>
+      <v-btn dark text @click="snackbar = false">CLOSE</v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -57,10 +62,12 @@ function deleteComment(targetId) {
 }
 
 export default {
+  props: ["color"],
   data() {
     return {
       posts: [],
       dialog: false,
+      snackbar: false,
       currentIndex: null
     };
   },
@@ -105,6 +112,8 @@ export default {
       this.posts.splice(index, 1);
       this.dialog = false;
       this.currentIndex = null;
+      //snackbarを表示
+      this.snackbar = true;
     }
   }
 };
