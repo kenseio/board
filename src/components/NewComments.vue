@@ -37,7 +37,7 @@
       </v-card>
     </v-dialog>
 
-    <v-snackbar v-model="snackbar" bottom right timeout="6000" :color="color">
+    <v-snackbar v-model="snackbar" bottom right :timeout="timeout" :color="color">
       コメントを削除しました。
       <v-btn dark text @click="snackbar = false">CLOSE</v-btn>
     </v-snackbar>
@@ -56,11 +56,11 @@ function deleteComment(targetId) {
 }
 
 export default {
-  props: ["color"],
+  props: ["color", "timeout"],
   data() {
     return {
       dialog: false,
-      snakcbar: false,
+      snackbar: false,
       currentIndex: 0
     };
   },

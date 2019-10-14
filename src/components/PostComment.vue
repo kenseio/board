@@ -30,7 +30,7 @@
     </v-row>
     <br />
 
-    <v-snackbar v-model="snackbar" bottom right timeout="6000" :color="color">
+    <v-snackbar v-model="snackbar" bottom right :timeout="timeout" multi-line :color="color">
       <span>コメントを投稿しました。</span>
       <v-btn dark text @click="snackbar = false">CLOSE</v-btn>
     </v-snackbar>
@@ -46,7 +46,7 @@ function datetimeFormatter(time) {
 }
 
 export default {
-  props: ["color"],
+  props: ["color", "timeout"],
   data() {
     return {
       name: "",

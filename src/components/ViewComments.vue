@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <hr />
-    <NewComments :color="color" />
-    <OldComments :color="color" />
+    <NewComments :color="color" :timeout="timeout" />
+    <OldComments :color="color" :timeout="timeout" />
   </v-app>
 </template>
 
@@ -11,7 +11,7 @@ import NewComments from "./NewComments.vue";
 import OldComments from "./OldComments.vue";
 
 export default {
-  props: ["color"],
+  props: ["color", "timeout"],
   components: {
     NewComments,
     OldComments

@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <div id="app">
-      <PostComment :color="color" />
-      <ViewComments :color="color" />
+      <PostComment :color="color" :timeout="timeout" />
+      <ViewComments :color="color" :timeout="timeout" />
     </div>
   </v-app>
 </template>
@@ -22,7 +22,8 @@ export default {
   },
   data() {
     return {
-      color: "blue-grey darken-2"
+      color: "blue-grey darken-2",
+      timeout: 6000
     };
   }
 };
